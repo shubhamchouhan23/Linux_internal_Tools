@@ -1,46 +1,38 @@
+
+
 #include<stdio.h>
 #include<string.h>
-#include<pthread.h>
 #include<stdlib.h>
+#include<pthread.h>
 #include<unistd.h>
 
-pthread_t tid[2];
 
-void* doSomeThing(void *arg)
+void* callThread(void *thrdId)
 {
-    unsigned long i = 0;
-    pthread_t id = pthread_self();
-
-    if(pthread_equal(id,tid[0]))
-    {
-        printf("\n First thread processing\n");
-    }
-    else
-    {
-        printf("\n Second thread processing\n");
-    }
-
-    for(i=0; i<(0xFFFFFFFF);i++);
-
-    return NULL;
+	printf("\ncallThread() function called by thread_id 'tid1' in execution....\n\n");
+	while(1);		
 }
+
 
 int main(void)
 {
-    int i = 0;
-    int err;
-
-    while(i < 2)
-    {
-        err = pthread_create(&(tid[i]), NULL, &doSomeThing, NULL);
-        if (err != 0)
-            printf("\ncan't create thread :[%s]", strerror(err));
-        else
-            printf("\n Thread created successfully\n");
-
-        i++;
-    }
-
-    sleep(5);
-    return 0;
+	pthread_t tid1;
+	int status;
+	
+	printf("creating thread\n");
+	
+	pthread_create(&tid1, NULL, callThread, NULL);		
+	
+	printf("thread id %ld\n", tid1);
+		
+	
+	sleep(3);		
+	printf("Cancelling thread .....\n");
+	
+	status = pthread_cancel(tid1);
+	
+	printf("Thread cancelled.....\n");
+	
+	
+	return 0;
 }
