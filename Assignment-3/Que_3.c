@@ -8,7 +8,6 @@ void * function(void *attr)
  sleep(3);
  printf("Thread attributes has been changed\n");
 }
-
 int main()
 {
  pthread_attr_t attr;
