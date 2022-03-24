@@ -3,25 +3,19 @@
 #include<pthread.h>
 
 int a = 4;
-
 void f1(void)
 {
- //a*a;
- printf("Square is: %d\n",a*a);
+  printf("Square is: %d\n",a*a);
 }
-
 void f2(void)
 {
- //a*a*a;
- printf("Cube is: %d\n",a*a*a);
+  printf("Cube is: %d\n",a*a*a);
 }
-
 void f3(void)
 {
  a++;
  printf("Value incremented to: %d\n",a);
 }
-
 int main()
 {
  printf("Value: %d\n", a);
